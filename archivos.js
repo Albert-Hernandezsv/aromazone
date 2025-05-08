@@ -1,4 +1,163 @@
 /*=============================================
+DESCARGAR TABLA NOTAS DE CREDITO Y DEBITO
+=============================================*/
+function notasExcel() {
+    // Mostrar el mensaje de carga con SweetAlert
+    swal({
+        title: "Generando archivo",
+        text: "Por favor espera mientras se genera el archivo.",
+        icon: "info",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
+
+    // Obtener la instancia de DataTable
+    const dataTable = $('#notasExcel').DataTable();
+
+    // Obtener todos los datos de la tabla, no solo los visibles
+    const data = dataTable.rows().data().toArray();
+
+    // Crear un nuevo libro de trabajo con ExcelJS
+    const wb = new ExcelJS.Workbook();
+    const ws = wb.addWorksheet("Facturas");
+
+    // Obtener los encabezados de la tabla
+    const headers = [];
+    $('#notasExcel thead th').each(function() {
+        headers.push($(this).text().trim());
+    });
+    headers.pop(); // Quitar la última columna
+    // Agregar los encabezados como primera fila en el Excel
+    ws.addRow(headers);
+
+    // Agregar las filas de datos
+    // Agregar las filas de datos, quitando la última columna
+    data.forEach(row => {
+        const rowData = Array.from(row);
+        rowData.pop(); // Quitar la última columna
+        ws.addRow(rowData);
+    });
+
+
+    // Exportar el archivo Excel
+    wb.xlsx.writeBuffer().then(function(buffer) {
+        const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "notas_credito_debito.xlsx";
+        link.click();
+    });
+
+    // Cerrar el mensaje de carga
+    swal.close();
+}
+
+/*=============================================
+DESCARGAR TABLA ANULADAS
+=============================================*/
+function anuladasExcel() {
+    // Mostrar el mensaje de carga con SweetAlert
+    swal({
+        title: "Generando archivo",
+        text: "Por favor espera mientras se genera el archivo.",
+        icon: "info",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
+
+    // Obtener la instancia de DataTable
+    const dataTable = $('#anuladasExcel').DataTable();
+
+    // Obtener todos los datos de la tabla, no solo los visibles
+    const data = dataTable.rows().data().toArray();
+
+    // Crear un nuevo libro de trabajo con ExcelJS
+    const wb = new ExcelJS.Workbook();
+    const ws = wb.addWorksheet("Facturas");
+
+    // Obtener los encabezados de la tabla
+    const headers = [];
+    $('#anuladasExcel thead th').each(function() {
+        headers.push($(this).text().trim());
+    });
+    headers.pop(); // Quitar la última columna
+    // Agregar los encabezados como primera fila en el Excel
+    ws.addRow(headers);
+
+    // Agregar las filas de datos
+    // Agregar las filas de datos, quitando la última columna
+    data.forEach(row => {
+        const rowData = Array.from(row);
+        rowData.pop(); // Quitar la última columna
+        ws.addRow(rowData);
+    });
+
+
+    // Exportar el archivo Excel
+    wb.xlsx.writeBuffer().then(function(buffer) {
+        const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "facturas_invalidadas.xlsx";
+        link.click();
+    });
+
+    // Cerrar el mensaje de carga
+    swal.close();
+}
+
+/*=============================================
+DESCARGAR TABLA ELIMINADAS SIN TRANSMITIR
+=============================================*/
+function eliminadasExcel() {
+    // Mostrar el mensaje de carga con SweetAlert
+    swal({
+        title: "Generando archivo",
+        text: "Por favor espera mientras se genera el archivo.",
+        icon: "info",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
+
+    // Obtener la instancia de DataTable
+    const dataTable = $('#eliminadasExcel').DataTable();
+
+    // Obtener todos los datos de la tabla, no solo los visibles
+    const data = dataTable.rows().data().toArray();
+
+    // Crear un nuevo libro de trabajo con ExcelJS
+    const wb = new ExcelJS.Workbook();
+    const ws = wb.addWorksheet("Facturas");
+
+    // Obtener los encabezados de la tabla
+    const headers = [];
+    $('#eliminadasExcel thead th').each(function() {
+        headers.push($(this).text().trim());
+    });
+
+    // Agregar los encabezados como primera fila en el Excel
+    ws.addRow(headers);
+
+    // Agregar las filas de datos
+    ws.addRows(data);
+
+    // Exportar el archivo Excel
+    wb.xlsx.writeBuffer().then(function(buffer) {
+        const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "eilimnadas_sin_transmitir.xlsx";
+        link.click();
+    });
+
+    // Cerrar el mensaje de carga
+    swal.close();
+}
+
+/*=============================================
 DESCARGAR TABLA VENTAS AROMAZONE EN PDF
 =============================================*/
 function ventasAromazonePdf() {

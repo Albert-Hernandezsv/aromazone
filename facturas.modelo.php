@@ -197,6 +197,34 @@ class ModeloFacturas{
 
 	}
 
+	static public function mdlMostrarFacturasEliminadasOptimizadas($tabla, $item, $valor, $orden){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id DESC LIMIT 10");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC LIMIT 10");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 	static public function mdlMostrarFacturasVentas($tabla, $fechaInicio, $fechaFin){
 
 		$stmt = Conexion::conectar()->prepare(
@@ -229,6 +257,32 @@ class ModeloFacturas{
 		$stmt = Conexion::conectar()->prepare(
 			"SELECT * FROM $tabla 
 			 WHERE fecEmi BETWEEN :fechaInicio AND :fechaFin 
+			 ORDER BY id DESC"
+		);
+	
+		$stmt->bindParam(":fechaInicio", $fechaInicio, PDO::PARAM_STR);
+		$stmt->bindParam(":fechaFin", $fechaFin, PDO::PARAM_STR);
+	
+		$stmt->execute();
+	
+		$resultado = $stmt->fetchAll();
+	
+		$stmt = null;
+	
+		return $resultado;
+	}
+
+	static public function mdlMostrarFacturasEliminadasFechaOptimizada($tabla, $fechaOptimizada) {
+
+		// Obtener primer día del mes
+		$fechaInicio = $fechaOptimizada . "-01";
+	
+		// Obtener último día del mes (con date("Y-m-t"))
+		$fechaFin = date("Y-m-t", strtotime($fechaInicio));
+	
+		$stmt = Conexion::conectar()->prepare(
+			"SELECT * FROM $tabla 
+			 WHERE fecha BETWEEN :fechaInicio AND :fechaFin 
 			 ORDER BY id DESC"
 		);
 	

@@ -126,11 +126,24 @@ class ControladorFacturas{
 	MOSTRAR ANULACIONES
 	=============================================*/
 
-	static public function ctrMostrarAnulaciones($item, $valor, $orden){
+	static public function ctrMostrarAnulaciones($item, $valor, $orden, $optimizacion){
 
 		$tabla = "anuladas";
 
-		$respuesta = ModeloFacturas::MdlMostrarFacturas($tabla, $item, $valor, $orden);
+		if($optimizacion == "si"){
+			$respuesta = ModeloFacturas::mdlMostrarFacturasOptimizadas($tabla, $item, $valor, $orden);
+		} else {
+			$respuesta = ModeloFacturas::MdlMostrarFacturas($tabla, $item, $valor, $orden);
+		}
+
+		return $respuesta;
+	}
+
+	static public function ctrMostrarAnulacionesFechaOptimizada($fechaOptimizada){
+
+		$tabla = "anuladas";
+
+		$respuesta = ModeloFacturas::MdlMostrarFacturasFechaOptimizada($tabla, $fechaOptimizada);
 
 		return $respuesta;
 	}
