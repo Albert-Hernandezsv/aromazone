@@ -393,6 +393,49 @@ if($factura == null){
             $nombreFacturador = $value["nombre"];
         }
     }
+
+    $unidades = [
+        "59" => "Unidad",
+        "57" => "Ciento",
+        "58" => "Docena",
+        "1"  => "Metro",
+        "2"  => "Yarda",
+        "6"  => "Milímetro",
+        "9"  => "Kilómetro cuadrado",
+        "10" => "Hectárea",
+        "13" => "Metro cuadrado",
+        "15" => "Vara cuadrada",
+        "18" => "Metro cúbico",
+        "20" => "Barril",
+        "22" => "Galón",
+        "23" => "Litro",
+        "24" => "Botella",
+        "26" => "Mililitro",
+        "30" => "Tonelada",
+        "32" => "Quintal",
+        "33" => "Arroba",
+        "34" => "KG",
+        "36" => "Libra",
+        "37" => "Onza troy",
+        "38" => "Onza",
+        "39" => "Gramo",
+        "40" => "Miligramo",
+        "42" => "Megawatt",
+        "43" => "Kilowatt",
+        "44" => "Watt",
+        "45" => "Megavoltio-amperio",
+        "46" => "Kilovoltio-amperio",
+        "47" => "Voltio-amperio",
+        "49" => "Gigawatt-hora",
+        "50" => "Megawatt-hora",
+        "51" => "Kilowatt-hora",
+        "52" => "Watt-hora",
+        "53" => "Kilovoltio",
+        "54" => "Voltio",
+        "55" => "Millar",
+        "56" => "Medio millar",
+        "99" => "Otra"
+    ];
 // create some HTML content
 $html = '<br><br><br><div style="font-family: Arial, sans-serif; font-size: 9px;">
 <hr>
@@ -525,7 +568,7 @@ if($factura["tipoDte"] === "01" && $cliente["tipo_cliente"] === "00"){// Factura
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioConIva"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -659,7 +702,7 @@ if($factura["tipoDte"] == "01" && $cliente["tipo_cliente"] == "01"){// Factura, 
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioConIva"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -794,7 +837,7 @@ if($factura["tipoDte"] == "01" && $cliente["tipo_cliente"] == "02"){// Factura, 
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1142,7 +1185,7 @@ if($factura["tipoDte"] == "03" && $cliente["tipo_cliente"] == "01"){// CCF, Decl
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1276,7 +1319,7 @@ if($factura["tipoDte"] == "03" && $cliente["tipo_cliente"] == "02"){// CCF, Empr
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1412,7 +1455,7 @@ if($factura["tipoDte"] == "03" && $cliente["tipo_cliente"] == "03"){// CCF, Dipl
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1548,7 +1591,7 @@ if($factura["tipoDte"] == "11" && ($cliente["tipo_cliente"] == "01" || $cliente[
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1637,7 +1680,7 @@ if($factura["tipoDte"] == "14" && $cliente["tipo_cliente"] == "00"){// Sujeto no
         <td style="text-align:center; background-color: rgb(176, 255, 174)" colspan="3">
             <br><br><b>Cant.</b>
         </td>
-        <td style="text-align:center; background-color: rgb(176, 255, 174)" colspan="4">
+        <td style="text-align:center; background-color: rgb(176, 255, 174)" colspan="3">
             <br><br><b>Unidad</b>
         </td>
         <td style="text-align:center; background-color: rgb(176, 255, 174)" colspan="7">
@@ -1675,7 +1718,7 @@ if($factura["tipoDte"] == "14" && $cliente["tipo_cliente"] == "00"){// Sujeto no
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -1809,7 +1852,7 @@ if($factura["tipoDte"] == "05" && $cliente["tipo_cliente"] == "01"){// Nota de c
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format((($producto["descuento"] * $producto["cantidad"])), 2, '.', ',').'</td>                    
@@ -1931,7 +1974,7 @@ if($factura["tipoDte"] == "05" && $cliente["tipo_cliente"] == "02"){// Nota de c
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"] * $producto["cantidad"]), 2, '.', ',').'</td>                    
@@ -2052,7 +2095,7 @@ if($factura["tipoDte"] == "05" && $cliente["tipo_cliente"] == "03"){// Nota de c
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format((($producto["descuento"] * $producto["cantidad"])), 2, '.', ',').'</td>
@@ -2176,7 +2219,7 @@ if($factura["tipoDte"] == "06" && $cliente["tipo_cliente"] == "01"){// Nota de d
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
@@ -2301,7 +2344,7 @@ if($factura["tipoDte"] == "06" && $cliente["tipo_cliente"] == "02"){// Nota de d
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
@@ -2426,7 +2469,7 @@ if($factura["tipoDte"] == "06" && $cliente["tipo_cliente"] == "03"){// Nota de d
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["descuento"]), 2, '.', ',').'</td>
@@ -2554,7 +2597,7 @@ if($factura["idFacturaRelacionada"] != ""){
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -2670,7 +2713,7 @@ if($factura["idFacturaRelacionada"] != ""){
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -2786,7 +2829,7 @@ if($factura["idFacturaRelacionada"] != ""){
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -2902,7 +2945,7 @@ if($factura["idFacturaRelacionada"] != ""){
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -3017,7 +3060,7 @@ if($factura["idFacturaRelacionada"] != ""){
                         <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                        <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                        <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                         <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format((($producto["precioSinImpuestos"] * $producto["cantidad"])), 2, '.', ',').'</td>
@@ -3126,7 +3169,7 @@ if($factura["tipoDte"] == "04" && $cliente["tipo_cliente"] == "01"){// Nota de r
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -3241,7 +3284,7 @@ if($factura["tipoDte"] == "04" && $cliente["tipo_cliente"] == "02"){// Nota de r
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>
@@ -3357,7 +3400,7 @@ if($factura["tipoDte"] == "04" && $cliente["tipo_cliente"] == "03"){// Nota de r
                     <td style="border: 1px solid black; text-align:center;" colspan="2">'.$contador.'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="4">'.$producto["codigo"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.$producto["cantidad"].'</td>
-                    <td style="border: 1px solid black; text-align:center;" colspan="4">Unidad</td>
+                    <td style="border: 1px solid black; text-align:center;" colspan="3">'.$unidades[$productoLei["unidadMedida"]].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="7">'.$productoLei["nombre"].'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">$'.number_format(($producto["precioSinImpuestos"]), 2, '.', ',').'</td>
                     <td style="border: 1px solid black; text-align:center;" colspan="3">'.round((($producto["descuento"] / $producto["precioSinImpuestos"]) * 100), 2).'%</td>

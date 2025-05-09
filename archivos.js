@@ -235,7 +235,7 @@ $('#anexoVentasAromazone thead th').each(function(index) {
 }
 
 /*=============================================
-DESCARGAR TABLA GENERAL DE CXC EN EXCEL
+DESCARGAR TABLA VENTAS AROMAZONE EN EXCEL
 =============================================*/
 function ventasAromazoneExcel() {
     swal({
@@ -270,7 +270,118 @@ function ventasAromazoneExcel() {
     swal.close();
 }
 
+/*=============================================
+DESCARGAR TABLA VENTAS SUJETO AROMAZONE EN PDF
+=============================================*/
+function ventasSujetoAromazonePdf() {
+	// Mostrar el mensaje de carga con SweetAlert
+    swal({
+        title: "Generando PDF",
+        text: "Por favor espera mientras se genera el archivo.",
+        icon: "info",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
+    // Obtener la instancia de DataTable
+    const dataTable = $('#anexoVentasSujetoAromazone').DataTable();
 
+    // Guardar la configuración original
+    const originalLength = dataTable.page.len();
+
+    // Mostrar todos los registros en una sola página
+    dataTable.page.len(-1).draw();
+
+    // Crear el PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: 'landscape',
+    });
+
+    // Obtener los encabezados de las columnas, excepto la última
+    const columns = [];
+$('#anexoVentasSujetoAromazone thead th').each(function(index) {
+    if (index < 12) { // Incluye todas las columnas
+        columns.push($(this).text());
+    }
+});
+
+
+    // Obtener los datos de la tabla, excluyendo la última columna
+    const rows = [];
+    dataTable.rows().every(function() {
+        const rowData = this.data();
+        rows.push(rowData.slice(0, 12)); // Excluye la última columna
+    });
+
+    // Generar la tabla en el PDF
+    doc.autoTable({
+        head: [columns],
+        body: rows,
+        theme: 'grid',
+        styles: { fontSize: 8 },
+        columnStyles: {
+            0: { cellWidth: 35 },  // Cliente
+            1: { cellWidth: 25 },  // Número de control
+            2: { cellWidth: 25 },  // Código de generación
+            3: { cellWidth: 15 },  // Tipo de factura
+            4: { cellWidth: 20 },  // Monto total
+            5: { cellWidth: 20 },  // Monto abonado
+            6: { cellWidth: 15 },  // Estado
+            7: { cellWidth: 20 },  // Fecha
+            8: { cellWidth: 15 },  // Días de atraso
+            9: { cellWidth: 25 },  // Vendedor
+            10: { cellWidth: 25 },  // Facturador
+            11: { cellWidth: 25 },  // Facturador
+        },
+        margin: { top: 10, left: 2, right: 10 },
+        pageBreak: 'auto',
+        tableWidth: 'auto',
+    });
+
+    // Restaurar la configuración original de paginación
+    dataTable.page.len(originalLength).draw();
+
+    // Guardar el PDF
+    doc.save('ventasSujetoExcluidoAromazonePdf.pdf');
+	swal.close()
+}
+
+/*=============================================
+DESCARGAR TABLA VENTAS SUJETO AROMAZONE EN EXCEL
+=============================================*/
+function ventasSujetoAromazoneExcel() {
+    swal({
+        title: "Generando archivo",
+        text: "Por favor espera mientras se genera el archivo.",
+        icon: "info",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        closeOnEsc: false,
+    });
+    
+    // Obtener la instancia del DataTable y todos los datos
+    var dt = $('#anexoVentasSujetoAromazone').DataTable();
+    var data = dt.rows().data().toArray();
+    
+    // Define tus encabezados deseados
+    var headers = ["Fecha", "Numero de control", "Cliente", "Concepto", "Monto", "Renta", "Total a recibir"];
+    
+    // Inserta los encabezados como la primera fila
+    data.unshift(headers);
+    
+    // Crea la hoja de trabajo a partir del arreglo de arreglos
+    var ws = XLSX.utils.aoa_to_sheet(data);
+    
+    // Crea un libro y añade la hoja
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "anexoVentasSujetoAromazone");
+    
+    // Exporta el archivo Excel
+    XLSX.writeFile(wb, "anexoVentasSujetoAromazone.xlsx");
+    
+    swal.close();
+}
 
 
 /*=============================================

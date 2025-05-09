@@ -309,6 +309,167 @@ date_default_timezone_set('America/El_Salvador');
        </table>
 
 
+       <div class="navbar bg-dark" style="color: white">Ventas AROMAZONE Sujeto Excluido</div>
+        <br>
+        <button class="btn btn-primary" onclick="ventasSujetoAromazonePdf()">Descargar reporte como pdf</button>
+        <button class="btn btn-success" onclick="ventasSujetoAromazoneExcel()">Descargar reporte como Excel</button>
+       <table class="table table-bordered table-striped dt-responsive tablaVentasAromazone" id="anexoVentasSujetoAromazone" width="100%" style="font-size: 60%">
+         
+        <thead>
+         
+         <tr>
+           
+           <th>Fecha</th>
+           <th>Número de control</th>
+           <th>Nombre</th>
+           <th>Concepto</th>
+           <th>Monto</th>
+           <th>Renta</th>
+           <th>Total a recibir</th>
+
+         </tr> 
+
+        </thead>
+                            
+        <tbody>
+
+            <?php
+              $pagoAcuentas = 0.0;
+              $item = null;
+              $valor = null;
+              $orden = "fecEmi";
+
+              if($optimizacion == "no"){
+                $facturas = ControladorFacturas::ctrMostrarFacturasVentas($filtroFechaInicio, $filtroFechaFin);
+              } else {
+                $facturas = ControladorFacturas::ctrMostrarFacturas($item, $valor, $orden, $optimizacion);
+              }
+
+              foreach ($facturas as $key => $value){
+                if(($value["tipoDte"] == "14") && $value["sello"] != "" && $value["estado"] == "Activa") {
+
+                    $item = "id";
+                    $valor = $value["id_cliente"];
+                    $orden = "id";
+
+                    $cliente = ControladorClientes::ctrMostrarClientes($item, $valor, $orden);
+
+                    $item = "id";
+                    $valor = $value["id_vendedor"];
+
+                    $usuario = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+
+                    if (
+                      (
+                          ($filtroFechaInicio == "todos" && $filtroFechaFin == "todos") || 
+                          ($filtroFechaInicio != "todos" && $filtroFechaFin == "tod os" && $value["fecEmi"] >= $filtroFechaInicio) ||
+                          ($filtroFechaInicio == "todos" && $filtroFechaFin != "todos" && $value["fecEmi"] <= $filtroFechaFin) ||
+                          ($filtroFechaInicio != "todos" && $filtroFechaFin != "todos" && $value["fecEmi"] >= $filtroFechaInicio && $value["fecEmi"] <= $filtroFechaFin)
+                      )
+                  ){
+                    
+                    // Decodificamos los productos (arreglo JSON)
+                    $productos = json_decode($value["productos"], true);
+                    $unidadesMedida = array(
+                      "59" => "Unidad",
+                      "57" => "Ciento",
+                      "58" => "Docena",
+                      "1"  => "Metro",
+                      "2"  => "Yarda",
+                      "6"  => "Milímetro",
+                      "9"  => "Kilómetro cuadrado",
+                      "10" => "Hectárea",
+                      "13" => "Metro cuadrado",
+                      "15" => "Vara cuadrada",
+                      "18" => "Metro cúbico",
+                      "20" => "Barril",
+                      "22" => "Galón",
+                      "23" => "Litro",
+                      "24" => "Botella",
+                      "26" => "Mililitro",
+                      "30" => "Tonelada",
+                      "32" => "Quintal",
+                      "33" => "Arroba",
+                      "34" => "Kilogramo",
+                      "36" => "Libra",
+                      "37" => "Onza troy",
+                      "38" => "Onza",
+                      "39" => "Gramo",
+                      "40" => "Miligramo",
+                      "42" => "Megawatt",
+                      "43" => "Kilowatt",
+                      "44" => "Watt",
+                      "45" => "Megavoltio-amperio",
+                      "46" => "Kilovoltio-amperio",
+                      "47" => "Voltio-amperio",
+                      "49" => "Gigawatt-hora",
+                      "50" => "Megawatt-hora",
+                      "51" => "Kilowatt-hora",
+                      "52" => "Watt-hora",
+                      "53" => "Kilovoltio",
+                      "54" => "Voltio",
+                      "55" => "Millar",
+                      "56" => "Medio millar",
+                      "99" => "Otra"
+                    );
+                    
+
+                    $montoSinRenta = 0.00;
+                    $renta = 0.00;
+                    $conceptos = "";
+
+                      // Si se decodificó bien y existen productos
+                      if (!empty($productos) && is_array($productos)) {
+
+                      // Recorremos cada producto
+                      foreach ($productos as $productoFactura) {
+                        $item = "id";
+                        $valor = $productoFactura["idProducto"];
+                
+                        $productoLeido = ControladorProductos::ctrMostrarProductos($item, $valor);
+                        $conceptos .= " - " . $productoLeido["nombre"];
+
+                        $item1 = "id";
+                        $valor1 = $productoLeido["categoria_id"];
+                
+                        $categoria = ControladorCategorias::ctrMostrarCategorias($item1, $valor1);
+
+                        $retenGran = 0.0;
+                        if($value["gran_contribuyente"] == "Si"){
+                          $retenGran = ($productoFactura["precioSinImpuestos"]*$productoFactura["cantidad"]) * 0.01;
+                        }
+
+                        // Supongamos que tu código numérico de unidad viene en $productoFactura["unidadMedida"]
+                        $codigoUM = $unidadesMedida[$productoLeido["unidadMedida"]]; // Ej. 56
+                        $montoSinRenta += ($productoFactura["precioSinImpuestos"]*$productoFactura["cantidad"])-$retenGran;
+                        $renta += (($productoFactura["precioSinImpuestos"]*$productoFactura["cantidad"])-$retenGran)*0.10;
+                      }
+
+                    }
+
+                    echo ' <tr>
+                                    <td>'.$value["fecEmi"].'</td>
+                                    <td>'.$value["numeroControl"].'</td>
+                                    <td>'.$cliente["nombre"].'</td>
+                                    <td>'.$conceptos.'</td>
+                                    <td>'.$montoSinRenta.'</td>
+                                    <td>'.$renta.'</td>
+                                    <td>'.$montoSinRenta - $renta.'</td>
+                            </tr>';
+
+                    }
+                  
+                 }
+                
+                          
+              }
+
+
+            ?> 
+
+        </tbody>
+
+       </table>
 
 
 
