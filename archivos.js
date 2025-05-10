@@ -210,16 +210,17 @@ $('#anexoVentasAromazone thead th').each(function(index) {
         columnStyles: {
             0: { cellWidth: 35 },  // Cliente
             1: { cellWidth: 25 },  // Número de control
-            2: { cellWidth: 25 },  // Código de generación
-            3: { cellWidth: 15 },  // Tipo de factura
-            4: { cellWidth: 20 },  // Monto total
-            5: { cellWidth: 20 },  // Monto abonado
-            6: { cellWidth: 15 },  // Estado
-            7: { cellWidth: 20 },  // Fecha
-            8: { cellWidth: 15 },  // Días de atraso
-            9: { cellWidth: 25 },  // Vendedor
-            10: { cellWidth: 25 },  // Facturador
+            2: { cellWidth: 25 },  // Número de control
+            3: { cellWidth: 25 },  // Código de generación
+            4: { cellWidth: 15 },  // Tipo de factura
+            5: { cellWidth: 20 },  // Monto total
+            6: { cellWidth: 20 },  // Monto abonado
+            7: { cellWidth: 15 },  // Estado
+            8: { cellWidth: 20 },  // Fecha
+            9: { cellWidth: 15 },  // Días de atraso
+            10: { cellWidth: 25 },  // Vendedor
             11: { cellWidth: 25 },  // Facturador
+            12: { cellWidth: 25 },  // Facturador
         },
         margin: { top: 10, left: 2, right: 10 },
         pageBreak: 'auto',
@@ -252,7 +253,7 @@ function ventasAromazoneExcel() {
     var data = dt.rows().data().toArray();
     
     // Define tus encabezados deseados
-    var headers = ["Cliente", "PO", "Vendedor", "Línea", "Facturación", "Fecha", "Cantidad", "UM", "Producto", "Precio individual sin IVA", "Reten. 1%", "Total sin IVA", "Total"];
+    var headers = ["Cliente", "PO", "Vendedor", "Línea", "Facturación", "Sello", "Fecha", "Cantidad", "UM", "Producto", "Precio individual sin IVA", "Reten. 1%", "Total sin IVA", "Total"];
     
     // Inserta los encabezados como la primera fila
     data.unshift(headers);
@@ -323,16 +324,17 @@ $('#anexoVentasSujetoAromazone thead th').each(function(index) {
         columnStyles: {
             0: { cellWidth: 35 },  // Cliente
             1: { cellWidth: 25 },  // Número de control
-            2: { cellWidth: 25 },  // Código de generación
-            3: { cellWidth: 15 },  // Tipo de factura
-            4: { cellWidth: 20 },  // Monto total
-            5: { cellWidth: 20 },  // Monto abonado
-            6: { cellWidth: 15 },  // Estado
-            7: { cellWidth: 20 },  // Fecha
-            8: { cellWidth: 15 },  // Días de atraso
-            9: { cellWidth: 25 },  // Vendedor
-            10: { cellWidth: 25 },  // Facturador
+            2: { cellWidth: 25 },  // Número de control
+            3: { cellWidth: 25 },  // Código de generación
+            4: { cellWidth: 15 },  // Tipo de factura
+            5: { cellWidth: 20 },  // Monto total
+            6: { cellWidth: 20 },  // Monto abonado
+            7: { cellWidth: 15 },  // Estado
+            8: { cellWidth: 20 },  // Fecha
+            9: { cellWidth: 15 },  // Días de atraso
+            10: { cellWidth: 25 },  // Vendedor
             11: { cellWidth: 25 },  // Facturador
+            12: { cellWidth: 25 },  // Facturador
         },
         margin: { top: 10, left: 2, right: 10 },
         pageBreak: 'auto',
@@ -365,7 +367,7 @@ function ventasSujetoAromazoneExcel() {
     var data = dt.rows().data().toArray();
     
     // Define tus encabezados deseados
-    var headers = ["Fecha", "Numero de control", "Cliente", "Concepto", "Monto", "Renta", "Total a recibir"];
+    var headers = ["Fecha", "Numero de control", "Sello", "Cliente", "Concepto", "Monto", "Renta", "Total a recibir"];
     
     // Inserta los encabezados como la primera fila
     data.unshift(headers);

@@ -159,6 +159,7 @@ date_default_timezone_set('America/El_Salvador');
            <th>Vendedor</th>
            <th>Línea</th>
            <th>Facturación</th>
+           <th>Sello</th>
            <th>Fecha</th>
            <th>Cantidad</th>
            <th>UM</th>
@@ -281,6 +282,7 @@ date_default_timezone_set('America/El_Salvador');
                                     <td>'.$usuario["nombre"].'</td>
                                     <td>'.$categoria["nombre"].'</td>
                                     <td>'.$value["numeroControl"].'</td>
+                                    <td>'.$value["sello"].'</td>
                                     <td>'.$value["fecEmi"].'</td>
                                     <td>'.$productoFactura["cantidad"].'</td>
                                     <td>'.$codigoUM.'</td>
@@ -321,6 +323,7 @@ date_default_timezone_set('America/El_Salvador');
            
            <th>Fecha</th>
            <th>Número de control</th>
+           <th>Sello</th>
            <th>Nombre</th>
            <th>Concepto</th>
            <th>Monto</th>
@@ -450,6 +453,7 @@ date_default_timezone_set('America/El_Salvador');
                     echo ' <tr>
                                     <td>'.$value["fecEmi"].'</td>
                                     <td>'.$value["numeroControl"].'</td>
+                                    <td>'.$value["sello"].'</td>
                                     <td>'.$cliente["nombre"].'</td>
                                     <td>'.$conceptos.'</td>
                                     <td>'.$montoSinRenta.'</td>
