@@ -2862,7 +2862,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
@@ -3081,7 +3081,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
@@ -3294,7 +3294,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
@@ -3520,7 +3520,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
@@ -3740,7 +3740,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
@@ -3954,7 +3954,7 @@ class AjaxFacturas {
                     "documentoRelacionado" => [
                         [
                         "tipoDocumento" => $facturaOriginal["tipoDte"],
-                        "tipoGeneracion" => 1,
+                        "tipoGeneracion" => 2,
                         "numeroDocumento" => $facturaOriginal["codigoGeneracion"],
                         "fechaEmision" => $facturaOriginal["fecEmi"]
                         ]
